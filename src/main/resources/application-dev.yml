@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://172.16.30.207:3306/springboot_demo?useUnicode=true&characterEncoding=UTF8
+    username: chenyu
+    password: 1qaz@WSX
+  redis:
+    host: 172.16.30.200
+#    port: 6379
+#    password:
+
