@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jypj.dev.dao.UserMapper">
+
+    <resultMap type="org.jypj.dev.entity.User" id="userMap">
+        <id property="id" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <collection property="roles" ofType="org.jypj.dev.entity.Role">
+            <id property="id" column="rid"/>
+            <result property="rname" column="rname"/>
+            <collection property="modules" ofType="org.jypj.dev.entity.Module">
+                <id property="id" column="mid"/>
+                <result property="mname" column="mname"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <sql id="testSql">
+        select * from user
+    </sql>
+
+    <select id="findByUserName" resultMap="userMap">
+        SELECT
+        u.id as uid,u.username,u.password,
+        r.id as rid,r.rname,
+        m.id as mid,m.mname
+        FROM user u inner join user_role ur on ur.uid=u.id
+        inner join role r on r.id=ur.rid
+        inner join module_role mr on mr.rid=r.id
+        inner join module m on mr.mid=m.id
+        WHERE username=#{username};
+    </select>
+</mapper>

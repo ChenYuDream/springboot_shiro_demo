@@ -1,5 +1,6 @@
 package org.jypj.dev.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
@@ -16,7 +17,8 @@ import java.util.Set;
 public class Role {
 
     @TableId
-    private Integer rid;
+    @TableField("rid")
+    private Integer id;
     private String rname;
     private Set<User> users = new HashSet<>();
     private Set<Module> modules = new HashSet<>();

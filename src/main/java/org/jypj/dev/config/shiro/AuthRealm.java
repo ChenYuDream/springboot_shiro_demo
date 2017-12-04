@@ -1,4 +1,4 @@
-package org.jypj.dev.shiro.config;
+package org.jypj.dev.config.shiro;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -9,6 +9,7 @@ import org.jypj.dev.entity.Module;
 import org.jypj.dev.entity.Role;
 import org.jypj.dev.entity.User;
 import org.jypj.dev.service.UserService;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -18,11 +19,18 @@ import java.util.Set;
 /**
  * @author ChenYu
  */
+@Component
 public class AuthRealm extends AuthorizingRealm {
     @Resource
     private UserService userService;
 
-    //认证.登录
+    /**
+     * 认证登录
+     *
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //获取用户输入的token
@@ -33,7 +41,13 @@ public class AuthRealm extends AuthorizingRealm {
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 
-    //授权
+
+    /**
+     * 授权
+     *
+     * @param principal
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
         //获取session中的用户

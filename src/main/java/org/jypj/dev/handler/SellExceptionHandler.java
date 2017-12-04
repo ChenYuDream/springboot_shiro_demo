@@ -1,6 +1,7 @@
 package org.jypj.dev.handler;
 
 import org.jypj.dev.exception.SellException;
+import org.jypj.dev.exception.TestException;
 import org.jypj.dev.result.Result;
 import org.jypj.dev.result.ResultUtil;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class SellExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(value = SellException.class)
+    @ExceptionHandler(value = TestException.class)
     @ResponseBody
     public Result handlerSellException(SellException e) {
         return ResultUtil.fail(e.getMessage());

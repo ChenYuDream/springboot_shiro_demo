@@ -17,7 +17,8 @@ import java.util.Set;
 public class Module {
 
     @TableId
-    private Integer mid;
+    @TableField("mid")
+    private Integer id;
     private String mname;
     private Set<Role> roles = new HashSet<>();
 }
